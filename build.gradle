@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+project.ext.mcversion="1.7.10"
+project.ext.forgeversion="10.13.0.1208"
+
+version = "mc"+mcversion + "-v0.$System.env.DRONE_BUILD_NUMBER"
+group= "packetlogger"
+archivesBaseName = "packetlogger"
+
+minecraft {
+	version = mcversion+"-"+forgeversion
+	assetDir = "eclipse/assets"
+
+	replace "@version@", project.version
+}
+
+dependencies {
+	
+}
+
+processResources {
+
+	inputs.property "version", project.version
+	inputs.property "mcversion", project.minecraft.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include 'mcmod.info'
+		expand 'version':project.version, 'mcversion':project.minecraft.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'mcmod.info'
+	}
+
+}
+
+jar {
+	
+	manifest {
+		attributes 'FMLCorePlugin': 'packetlogger.core.PacketLoggerCore'
+		attributes 'FMLCorePluginContainsFMLMod': 'true'
+	}
+	
+}
+
+task devJar(type: Jar) {
+	
+	manifest {
+		attributes 'FMLCorePlugin': 'packetlogger.core.PacketLoggerCore'
+		attributes 'FMLCorePluginContainsFMLMod': 'true'
+	}
+	
+	from(sourceSets.main.output) {
+		include "packetlogger/**"
+		include "assets/**"
+		include 'mcmod.info'
+	}
+	
+	classifier = 'dev'
+	
+}
+
+artifacts {
+	archives devJar
+}
