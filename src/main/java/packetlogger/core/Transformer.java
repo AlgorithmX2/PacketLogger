@@ -17,7 +17,6 @@ import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.AnnotationNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.IntInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
@@ -25,6 +24,7 @@ import cpw.mods.fml.relauncher.FMLRelaunchLog;
 
 public class Transformer implements IClassTransformer
 {
+
 	public static Transformer instance;
 
 	public Transformer() {
@@ -59,8 +59,8 @@ public class Transformer implements IClassTransformer
 	{
 		log( "Found Packet" );
 
-		log( MessageDeserializer.class.getName());
-		
+		log( MessageDeserializer.class.getName() );
+
 		ClassNode classNode = new ClassNode();
 		ClassReader classReader = new ClassReader( bytes );
 		classReader.accept( classNode, 0 );
@@ -93,7 +93,7 @@ public class Transformer implements IClassTransformer
 					if ( MethodDesc.readPacketData.isMethod( in ) )
 					{
 						in.name = "overridden_readPacketData";
-						log( "MessageDeserializer - Calling new Method." );		
+						log( "MessageDeserializer - Calling new Method." );
 					}
 				}
 			}

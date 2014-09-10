@@ -9,8 +9,9 @@ import org.objectweb.asm.tree.MethodNode;
 enum MethodDesc
 {
 	readPacketData("a", "func_148837_a", "readPacketData", "(Let;)V", "(Lnet/minecraft/network/PacketBuffer;)V"),
-	
-	decode("a", "decode", "decode", "(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lj ava/util/List;)V", "(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V" );
+
+	decode("a", "decode", "decode", "(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lj ava/util/List;)V",
+			"(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Ljava/util/List;)V");
 
 	String notch, srg, dev;
 	String desc0, desc1;
