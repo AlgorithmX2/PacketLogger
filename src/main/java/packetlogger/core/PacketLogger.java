@@ -95,7 +95,10 @@ public class PacketLogger
 		else if ( packet instanceof C17PacketCustomPayload )
 		{
 			C17PacketCustomPayload p = (C17PacketCustomPayload) packet;
-			log.info( "C17PacketCustomPayload: " + p.func_149559_c() + " containing " + p.func_149558_e().length + " bytes" );
+			if ( p.func_149558_e() == null )
+				log.info( "C17PacketCustomPayload: " + p.func_149559_c() + " containing null" );
+			else
+				log.info( "C17PacketCustomPayload: " + p.func_149559_c() + " containing " + p.func_149558_e().length + " bytes" );
 		}
 		else
 		{
